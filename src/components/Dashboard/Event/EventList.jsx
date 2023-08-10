@@ -11,7 +11,7 @@ function EventList() {
 
     const user = useSelector((state) => state.user.users);
 
-    const api_url = process.env.REACT_APP_API_URL;
+    const api_url = import.meta.env.VITE_API_URL;
     const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user.token};
 
     const [datas, setDatas] = useState([]);

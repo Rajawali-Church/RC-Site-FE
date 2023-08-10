@@ -8,13 +8,12 @@ import { useNavigate } from "react-router-dom";
 
 function Login() {
 
-    const api_url = process.env.REACT_APP_API_URL;
+    const api_url = import.meta.env.VITE_API_URL;
 
     const [action, setAction] = useState('login');
     const [loginInputData, setLoginInputData] = useState({username: '', password: ''});
     const [signUpinputData, setSignUpInputData] = useState({full_name: '', username: '', password: ''});
     const [isLoading, setIsLoading] = useState(false);
-    const [test, setTest] = useState('');
 
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -58,9 +57,7 @@ function Login() {
     const handleLogin = async () => {
         setIsLoading(true);
         try {
-            setTest('bisa 1');
             const res = await axios.post(api_url + '/login', loginInputData);
-            setTest('bisa 2');
 
             console.log(res.data);
 
@@ -78,8 +75,7 @@ function Login() {
 
             setIsLoading(false);
         } catch (err) {
-            setTest(err);
-            console.log(err.response);
+            console.log(err);
 
             if (err.response.status === 422) {
 
@@ -107,8 +103,6 @@ function Login() {
     return (
         <div className="relative flex flex-col items-center place-content-center bg-black w-screen h-screen text-white">
             <img src={background} className="z-0 opacity-60 absolute w-screen h-screen object-cover" />
-            
-            <input type="text" className="text-black" value={test}></input>
 
             <div className="z-10 flex items-center gap-2 mb-4">
                 <img onClick={() => navigate('/')} className="h-16 cursor-pointer" src={logo} />
@@ -118,6 +112,7 @@ function Login() {
             <div id="modal" className="relative z-10 lg:w-1/3 sm:w-11/12 p-6 bg-gray-800">
                 <div ref={refLogin} className="active-dx flex flex-col items-center w-full">
                     <p className="text-2xl mb-10 font-bold">Sign in to Your Account</p>
+                    {/* <pre className="w-1/6 h-full text-xs text-white">{JSON.stringify(test, null, 2)}</pre> */}
                     <div className="w-full">
                         <label className="text-base">Username</label>
                         <input onChange={handleInputSignIn} name="username" className="mt-2 rounded-lg w-full bg-gray-700 border-gray-600" type="text" required />

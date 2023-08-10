@@ -12,7 +12,7 @@ function ProtectingStaffRoute(props) {
     
     const dispatch = useDispatch();
 
-    const api_url = process.env.REACT_APP_API_URL;
+    const api_url = import.meta.env.VITE_API_URL;
     const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user};
 
     useEffect(() => {
