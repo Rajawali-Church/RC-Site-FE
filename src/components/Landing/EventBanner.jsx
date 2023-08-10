@@ -1,6 +1,6 @@
 import React from 'react'
 import poster1 from "../../assets/landing_background.jpg";
-import poster2 from "../../assets/easter.jpg";
+import poster2 from "../../assets/Easter.jpg";
 import poster3 from "../../assets/thumb1.jpg";
 import poster4 from "../../assets/thumb2.jpg";
 
