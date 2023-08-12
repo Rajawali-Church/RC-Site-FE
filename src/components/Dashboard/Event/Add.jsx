@@ -3,6 +3,7 @@ import Breadcrumb from '../../Breadcrumb';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Add() {
 
@@ -33,7 +34,9 @@ function Add() {
             )
 
             navigate('/dashboard/event');
+            toast.success(`Add an Event Success (${res.data.data.event_name})`);
         } catch (err) {
+            toast.error(`Error adding event ${err.response.data.message ?? 'undefined'}`);
             console.log(err);
         } 
     }
@@ -47,15 +50,15 @@ function Add() {
 
                 <div className='grid grid-cols-1 lg:grid-cols-2 gap-y-5'>
                     <div className='flex flex-col gap-1'>
-                        <p className='text-base font-semibold'>Event Name</p>
+                        <p className='text-base font-semibold'>Event Name <span className='text-red-600'>*</span></p>
                         <input onChange={handleChange} name='event_name' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' value={null} />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <p className='text-base font-semibold'>Date</p>
+                        <p className='text-base font-semibold'>Date <span className='text-red-600'>*</span></p>
                         <input onChange={handleChange} name='date' type='date' className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-3/4 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500' value={null} />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <p className='text-base font-semibold'>Type</p>
+                        <p className='text-base font-semibold'>Type <span className='text-red-600'>*</span></p>
                         <select onChange={handleChange} name='type' value={null} className='bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'>
                             <option>weekly</option>
                             <option>special</option>

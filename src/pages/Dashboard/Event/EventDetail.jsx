@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Edit, NavbarLogin, Sidebar } from '../../components';
+import { DetailEvent, NavbarLogin } from '../../../components';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-function EventEdit() {
+function EventDetail() {
 
     const user = useSelector((state) => state.user.users);
 
@@ -19,7 +19,7 @@ function EventEdit() {
 
         const fetch = async () => {
             try {
-                const res = await axios(api_url + `/event/${id}`, { headers })
+                const res = await axios.get(api_url + `/event/${id}`, { headers })
 
                 setEvent(res.data.data);
             } catch (err) {
@@ -35,11 +35,11 @@ function EventEdit() {
         <div className="text-white">
             <NavbarLogin />
 
-            <Sidebar />
-
-            <Edit event={event} id={id} />
+            <div className='z-10'>
+                <DetailEvent event={event} id={id} />
+            </div>
         </div>
     )
 }
 
-export default EventEdit;
+export default EventDetail;

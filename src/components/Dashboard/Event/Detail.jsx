@@ -4,6 +4,7 @@ import Table from '../../Table';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 function Detail({event, id}) {
 
@@ -23,10 +24,12 @@ function Detail({event, id}) {
 
     const handleDelete = async () => {
         try {
-            await axios.delete(api_url + `/event/${id}`, { headers });
+            const res = await axios.delete(api_url + `/event/${id}`, { headers });
 
             navigate('/dashboard/event');
+            toast.success(`Delete an Event Success (${res.data.data.event_name})`);
         } catch (err) {
+            toast.error(`Error adding event ${err?.response?.data?.message ?? 'undefined'}`);
             console.log(err);
         }
     }
@@ -37,58 +40,8 @@ function Detail({event, id}) {
                 const res = await axios.get(api_url + `/event/${id}/volunteer`, { headers });
 
                 const data = res.data.data;
-                
-                console.log(data);
 
-                setVolunteer(
-                    [
-                        {
-                            id: data?.worship_lead?.id,
-                            name: data?.worship_lead?.full_name,
-                            role: "Worship Leader"
-                        },
-                        {
-                            id: data?.keyboard?.id,
-                            name: data?.keyboard?.full_name,
-                            role: "Keyboard"
-                        },
-                        {
-                            id: data?.guitar?.id,
-                            name: data?.guitar?.full_name,
-                            role: "Guitar"
-                        },
-                        {
-                            id: data?.bass?.id,
-                            name: data?.bass?.full_name,
-                            role: "Bass"
-                        },
-                        {
-                            id: data?.drum?.id,
-                            name: data?.drum?.full_name,
-                            role: "Drum"
-                        },
-                        {
-                            id: data?.lcd?.id,
-                            name: data?.lcd?.full_name,
-                            role: "LCD"
-                        },
-                        {
-                            id: data?.sound?.id,
-                            name: data?.sound?.full_name,
-                            role: "Sound"
-                        },
-                        {
-                            id: data?.camera?.id,
-                            name: data?.camera?.full_name,
-                            role: "Camera"
-                        },
-                        {
-                            id: data?.green_screen?.id,
-                            name: data?.green_screen?.full_name,
-                            role: "Green Screen"
-                        },
-                    ]
-                );
+                setVolunteer(data);
             } catch (err) {
                 console.log(err);
             }
@@ -135,7 +88,7 @@ function Detail({event, id}) {
 
                 <div className='my-8'></div>
 
-                <Table paths={'/'} datas={volunteer} types={null} columns={columns} key={['a']} />
+                <Table paths={'/dashboard/volunteer'} datas={volunteer} types={null} columns={columns} />
             </div>
         </div>
     )

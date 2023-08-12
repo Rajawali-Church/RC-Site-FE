@@ -5,6 +5,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { saveUser } from "../redux/sliceUser";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 function Login() {
 
@@ -60,6 +61,7 @@ function Login() {
             const res = await axios.post(api_url + '/login', loginInputData);
 
             console.log(res.data);
+            toast.success(`Welcome ${res.data.data.user?.full_name}`);
 
             dispatch(saveUser(
                 {
@@ -78,11 +80,11 @@ function Login() {
             console.log(err);
 
             if (err.response.status === 422) {
-
+                toast.error(`${err.response.data.message ?? 'undefined'}`);
             } else if (err.response.status === 500) {
-
+                toast.error(`Server Interal`);
             } else {
-
+                toast.error(`Username or Password is incorrect`);
             }
 
             setIsLoading(false);

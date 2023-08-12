@@ -1,7 +1,7 @@
 import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { PersistGate } from "redux-persist/integration/react";
-import { Dashboard, EventAdd, EventDetail, EventEdit, IndexEvent, Landing, Login } from "../pages";
+import { AddVolunteer, Dashboard, DetailVolunteer, EditVolunteer, EventAdd, EventDetail, EventEdit, IndexEvent, Landing, Login } from "../pages";
 import { persistor, store } from "../redux/store";
 import ProtectingRoute from "./protectingRoute";
 
@@ -66,6 +66,33 @@ const Routers = () => {
                             element={
                                 <ProtectingRoute>
                                     <EventEdit />
+                                </ProtectingRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/dashboard/add/volunteer"
+                            element={
+                                <ProtectingRoute>
+                                    <AddVolunteer />
+                                </ProtectingRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/dashboard/volunteer/:id"
+                            element={
+                                <ProtectingRoute>
+                                    <DetailVolunteer />
+                                </ProtectingRoute>
+                            }
+                        />
+
+                        <Route
+                            path="/dashboard/volunteer/edit/:id"
+                            element={
+                                <ProtectingRoute>
+                                    <EditVolunteer />
                                 </ProtectingRoute>
                             }
                         />

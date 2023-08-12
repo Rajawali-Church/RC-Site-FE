@@ -4,6 +4,7 @@ import Table from '../../Table';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 function Edit({event, id}) {
 
@@ -37,7 +38,9 @@ function Edit({event, id}) {
             )
 
             navigate('/dashboard/event');
+            toast.success(`Update an Event Success (${res.data.data.event_name})`);
         } catch (err) {
+            toast.error(`Error adding event ${err?.response?.data?.message ?? 'undefined'}`);
             console.log(err);
         } 
     }

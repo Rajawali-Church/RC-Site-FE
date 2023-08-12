@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
-import { Detail, NavbarLogin, Sidebar } from '../../components';
+import { EditEvent, NavbarLogin } from '../../../components';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
 
-function EventDetail() {
+function EventEdit() {
 
     const user = useSelector((state) => state.user.users);
 
@@ -35,11 +35,11 @@ function EventDetail() {
         <div className="text-white">
             <NavbarLogin />
 
-            <Sidebar />
-
-            <Detail event={event} id={id} />
+            <div className='z-10'>
+                <EditEvent event={event} id={id} />
+            </div>
         </div>
     )
 }
 
-export default EventDetail;
+export default EventEdit;

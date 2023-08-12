@@ -1,11 +1,15 @@
+import { ToastContainer } from 'react-toastify';
 import './App.css';
-import Landing from './pages/Landing';
 import Routers from './routes';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
     return (
-        <Routers />
+        <div>
+            <ToastContainer />
+            <Routers />
+        </div>
     )
 }
 

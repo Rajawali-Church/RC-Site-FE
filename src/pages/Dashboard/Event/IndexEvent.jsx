@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
-import { EventList, NavbarLogin, Sidebar } from "../../components";
+import { EventList, NavbarLogin } from "../../../components";
 
 function IndexEvent() {
 
     return (
         <div className="text-white">
             <NavbarLogin />
-
-            <Sidebar />
-
-            <EventList />
+            
+            <div className='z-10'>
+                <EventList />
+            </div>
         </div>
     )
 }
