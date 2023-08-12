@@ -13,7 +13,7 @@ function ProtectingStaffRoute(props) {
     const dispatch = useDispatch();
 
     const api_url = import.meta.env.VITE_API_URL;
-    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user};
+    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user, "ngrok-skip-browser-warning": true };
 
     useEffect(() => {
         const handleGetFood = async () => {

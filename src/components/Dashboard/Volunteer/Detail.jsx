@@ -11,7 +11,7 @@ function DetailVolunteer() {
     const user = useSelector((state) => state.user.users);
 
     const api_url = import.meta.env.VITE_API_URL;
-    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user.token};
+    const headers = { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + user.token, "ngrok-skip-browser-warning": true };
 
     const [volunteer, setVolunteer] = useState({});
 
